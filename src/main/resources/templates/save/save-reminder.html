@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Save Reminder</title>
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .container {
+        max-width: 500px;
+        margin-top: 50px;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .form-control:focus {
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    }
+    .btn-primary {
+        width: 100%;
+        font-size: 18px;
+    }
+    .error-message {
+        color: red;
+        font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 class="text-center mb-4">Create Reminder</h2>
+
+  <form th:action="@{/reminders/save}" th:object="${reminder}" method="post">
+    <!-- Content Field -->
+    <div class="mb-3">
+      <label for="content" class="form-label">Content:</label>
+      <textarea id="content" th:field="*{content}" class="form-control" rows="3"></textarea>
+      <div class="error-message" th:if="${#fields.hasErrors('content')}"
+           th:errors="*{content}"></div>
+    </div>
+
+    <!-- Cron Expression Field -->
+    <div class="mb-3">
+      <label for="cronExpression" class="form-label">Cron Expression:</label>
+      <input type="text" id="cronExpression" th:field="*{cronExpression}" class="form-control" required />
+      <div class="error-message" th:if="${#fields.hasErrors('cronExpression')}"
+           th:errors="*{cronExpression}"></div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Reminder</button>
+  </form>
+
+  <!-- Back to Reminder List -->
+  <div class="text-center mt-3">
+    <a href="/reminders" class="btn btn-secondary">Back to Reminders</a>
+  </div>
+</div>
+
+</body>
+</html>
