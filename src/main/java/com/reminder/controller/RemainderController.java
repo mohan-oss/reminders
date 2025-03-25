@@ -30,7 +30,7 @@ public class RemainderController {
 //        remainderDto.setUserId(AppUtils.getUserPrinciple().getUserId());
         remainderDto.setUserId(userId);
         remainderService.saveRemainder(remainderDto);
-        return "redirect:/";
+        return "redirect:/get-reminders";
     }
 
     @GetMapping("/reminders/new")
@@ -47,7 +47,7 @@ public class RemainderController {
         return ResponseEntity.ok(remainders);
     }
 
-    @GetMapping("/")
+    @GetMapping("/get-reminders")
     public String home(Model model){
         log.info("home called");
         String userId = "9fd3e175-84d1-4253-aa62-eea63a46eb67";

@@ -16,12 +16,12 @@ import java.util.Arrays;
 @EnableScheduling
 @EnableJpaAuditing
 @Slf4j
-public class ExpensetrackerApplication implements CommandLineRunner {
+public class ReminderApplication implements CommandLineRunner {
 	@Autowired Environment environment;
 
 	public static void main(String[] args) {
 //		SpringApplication.run(ExpensetrackerApplication.class, args);
-		SpringApplication app = new SpringApplication(ExpensetrackerApplication.class);
+		SpringApplication app = new SpringApplication(ReminderApplication.class);
 		// Set active profiles programmatically
 		app.setAdditionalProfiles("dev");  // Set active profile to "dev"
 		app.run(args);
