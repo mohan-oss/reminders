@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Data Viewer</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        padding: 20px;
+        background-color: #f4f4f4;
+        text-align: center;
+    }
+    .container {
+        max-width: 800px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 10px;
+    }
+    button:hover {
+        background: #0056b3;
+    }
+    .list-container {
+        text-align: left;
+        margin-top: 20px;
+    }
+    h2 {
+        color: #333;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 5px;
+    }
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+    li {
+        background: #e9ecef;
+        margin: 5px 0;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>API Data Viewer</h1>
+  <button onclick="fetchData()">Fetch Data</button>
+  <button onclick="submitSelection()">Submit Selection</button>
+
+  <div class="list-container">
+    <h2>User Prompts</h2>
+    <ul id="userPrompts"></ul>
+  </div>
+
+  <div class="list-container">
+    <h2>Common Prompt Tailors</h2>
+    <ul id="commonPromptTailors"></ul>
+  </div>
+
+  <div class="list-container">
+    <h2>User Tailors</h2>
+    <ul id="userTailors"></ul>
+  </div>
+</div>
+
+<script>
+  async function fetchData() {
+      try {
+          const userPrompts = await fetch('/user/prompts').then(res => res.json());
+          const commonPromptTailors = await fetch('/common/prompt-tailors').then(res => res.json());
+          const userTailors = await fetch('/user/tailors').then(res => res.json());
+
+          document.getElementById('userPrompts').innerHTML = userPrompts.map(item => `<li>${item}</li>`).join('');
+          document.getElementById('commonPromptTailors').innerHTML = commonPromptTailors.map(item => `<li><label><input type='checkbox' value='${item}'> ${item}</label></li>`).join('');
+          document.getElementById('userTailors').innerHTML = userTailors.map(item => `<li><label><input type='checkbox' value='${item}'> ${item}</label></li>`).join('');
+      } catch (error) {
+          console.error('Error fetching data:', error);
+      }
+  }
+
+  async function submitSelection() {
+      const selectedTailors = Array.from(document.querySelectorAll("input[type='checkbox']:checked"))
+                                   .map(checkbox => checkbox.value);
+
+      try {
+          const response = await fetch('/submit/tailors', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(selectedTailors)
+          });
+          const result = await response.json();
+          alert('Selection submitted successfully: ' + JSON.stringify(result));
+      } catch (error) {
+          console.error('Error submitting data:', error);
+      }
+  }
+</script>
+</body>
+</html>

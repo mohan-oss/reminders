@@ -14,4 +14,7 @@ public class AppUtils {
             throw new NullPointerException("User principle not found in Security Context");
         }
     }
+    public static String getCurrentUserId(){
+        return "9fd3e175-84d1-4253-aa62-eea63a46eb67";
+    }
 }

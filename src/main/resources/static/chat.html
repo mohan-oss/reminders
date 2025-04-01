@@ -3,48 +3,270 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chat API</title>
+  <title>User Prompts</title>
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
-    #chat-container { max-width: 500px; margin: auto; }
-    textarea { width: 100%; height: 100px; padding: 10px; }
-    button { margin-top: 10px; padding: 10px; cursor: pointer; }
-    #response { margin-top: 20px; padding: 10px; border: 1px solid #ccc; white-space: pre-wrap; word-wrap: break-word; text-align: left; }
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        padding: 20px;
+        background-color: #f4f4f4;
+        display: flex;
+    }
+    .sidebar {
+        width: 30%;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        margin-right: 20px;
+        height: fit-content;
+    }
+    .main-content {
+        flex-grow: 1;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 10px;
+    }
+    button:hover {
+        background: #0056b3;
+    }
+    .list-container {
+        text-align: left;
+        margin-top: 20px;
+    }
+    h2 {
+        color: #333;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 5px;
+        cursor: pointer;
+    }
+    ul {
+        list-style: none;
+        padding: 0;
+        display: none;
+    }
+    li {
+        background: #e9ecef;
+        margin: 5px 0;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    textarea {
+        width: 100%;
+        height: 100px;
+        padding: 10px;
+    }
+    .response-container {
+        margin-top: 20px;
+        padding: 15px;
+        border: 1px solid #ccc;
+        background: #f9f9f9;
+        border-radius: 5px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        text-align: left;
+    }
+    .response-container code {
+        background: #272822;
+        color: #f8f8f2;
+        display: block;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+        font-family: "Courier New", monospace;
+    }
+    .response-container strong {
+        color: black;
+    }
+    .code-block {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.copy-btn:hover {
+    background: #0056b3;
+}
+
   </style>
 </head>
 <body>
-<div id="chat-container">
-  <h2>Chat with API</h2>
+<div class="sidebar">
+  <div class="list-container">
+    <h2 onclick="toggleList('userPrompts')">User Prompts</h2>
+    <ul id="userPrompts"></ul>
+  </div>
+  <div class="list-container">
+    <h2 onclick="toggleList('commonPromptTailors')">Common Prompt Tailors</h2>
+    <ul id="commonPromptTailors"></ul>
+  </div>
+  <div class="list-container">
+    <h2 onclick="toggleList('userTailors')">User Tailors</h2>
+    <ul id="userTailors"></ul>
+    <input type="text" id="newUserTailor" placeholder="Add new tailor...">
+    <button onclick="addUserTailor()">Add</button>
+  </div>
+</div>
+
+<div class="main-content">
+  <h2>Chat With AI</h2>
   <textarea id="chatInput" placeholder="Type your message..."></textarea>
   <button onclick="sendMessage()">Send</button>
-  <div id="response"></div>
+  <div id="response" class="response-container"></div>
 </div>
 
 <script>
+  function toggleList(id) {
+      const list = document.getElementById(id);
+      if (list.style.display === "none" || list.style.display === "") {
+          list.style.display = "block";
+          fetchData(id);
+      } else {
+          list.style.display = "none";
+      }
+  }
+
+  async function fetchData(type) {
+      try {
+          let url = "";
+          if (type === "userPrompts") url = "/user/prompts";
+          else if (type === "commonPromptTailors") url = "/common/prompt-tailors";
+          else if (type === "userTailors") url = "/user/tailors";
+
+          const data = await fetch(url).then(res => res.json());
+          const container = document.getElementById(type);
+          if (type === "commonPromptTailors" || type === "userTailors") {
+              container.innerHTML = data.map(item => `<li><label><input type='checkbox' value='${item}'> ${item}</label></li>`).join('');
+          } else {
+              container.innerHTML = data.map(item => `<li>${item}</li>`).join('');
+          }
+      } catch (error) {
+          console.error('Error fetching data:', error);
+      }
+  }
+
+  async function addUserTailor() {
+      const newTailor = document.getElementById("newUserTailor").value;
+      if (!newTailor) return;
+
+      try {
+          await fetch('/save-user-tailer', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(newTailor)
+          });
+          alert('User tailor added successfully!');
+          document.getElementById("newUserTailor").value = "";
+          fetchData('userTailors');
+      } catch (error) {
+          console.error('Error adding user tailor:', error);
+      }
+  }
+
   async function sendMessage() {
       const text = document.getElementById("chatInput").value;
       if (!text) return;
 
+      const selectedTailors = Array.from(document.querySelectorAll("input[type='checkbox']:checked"))
+                                   .map(checkbox => checkbox.value)
+                                   .join('\n');
+
+      const finalMessage = text + (selectedTailors ? `\nKey Points:\n${selectedTailors}` : '');
+
       const responseDiv = document.getElementById("response");
-      responseDiv.innerHTML = "Loading...";
+      responseDiv.innerHTML = "<strong>Loading...</strong>";
 
       try {
           const response = await fetch("/chat", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(text)
+              body: JSON.stringify({ message: finalMessage })
           });
 
-          if (!response.ok) {
-              throw new Error("Network response was not ok");
-          }
+          let data = await response.text();
+          data = formatResponse(data);
 
-          const data = await response.text();
-          responseDiv.innerText = "Response: " + data;
+          responseDiv.innerHTML = data;
       } catch (error) {
-          responseDiv.innerText = "Error: " + error.message;
+          responseDiv.innerHTML = "<strong>Error:</strong> " + error.message;
       }
   }
+
+ function formatResponse(text) {
+    // Code Blocks (Handles Java and other languages + Adds Copy Button)
+    text = text.replace(/```([\w]*)\n([\s\S]*?)```/g, (match, lang, code) => {
+        const escapedCode = code.trim().replace(/</g, "&lt;").replace(/>/g, "&gt;"); // Escape HTML
+        return `
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre><code class="${lang}">${escapedCode}</code></pre>
+        </div>`;
+    });
+
+    // Inline Code (Wrap with <code>)
+    text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+    // Bold (**bold text**)
+    text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+    // Italics (*italic text*)
+    text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+    // Headers (Markdown-style #, ##, ###)
+    text = text.replace(/^### (.*?)$/gm, '<h3>$1</h3>')
+               .replace(/^## (.*?)$/gm, '<h2>$1</h2>')
+               .replace(/^# (.*?)$/gm, '<h1>$1</h1>');
+
+    // Links [text](url)
+    text = text.replace(/\[([^\]]+)]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+
+    // Preserve line breaks
+    text = text.replace(/\n/g, '<br>');
+
+    return text;
+}
+
+// Copy Code Function
+function copyCode(button) {
+    const codeBlock = button.nextElementSibling.querySelector("code");
+    const textToCopy = codeBlock.innerText;
+
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        button.innerText = "Copied!";
+        setTimeout(() => button.innerText = "Copy", 1500);
+    }).catch(err => console.error("Failed to copy:", err));
+}
+
+
 </script>
 </body>
 </html>
