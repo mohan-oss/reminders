@@ -13,16 +13,16 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    @Autowired
-    private JwtUtility jwtUtility;
+//    @Autowired
+//    private JwtUtility jwtUtility;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(o -> o.requestMatchers("/user/register").permitAll()
                         .requestMatchers("/test").permitAll()
-                                .anyRequest().permitAll()
-//                        .anyRequest().authenticated()
+//                                .anyRequest().permitAll()
+                        .anyRequest().authenticated()
                 )
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(form -> form.defaultSuccessUrl("/get-reminders",true))
