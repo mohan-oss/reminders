@@ -1,7 +1,7 @@
 package com.reminder;
 
-import com.reminder.dao.ExpenseRepo;
-import com.reminder.entity.ExpenseEntity;
+import com.reminder.dao.app.ExpenseRepo;
+import com.reminder.entity.app.ExpenseEntity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;

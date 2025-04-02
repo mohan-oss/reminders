@@ -1,7 +1,7 @@
 package com.reminder.service;
 
 import com.reminder.dto.ExpenseDto;
-import com.reminder.entity.ExpenseEntity;
+import com.reminder.entity.app.ExpenseEntity;
 
 import java.util.List;
 

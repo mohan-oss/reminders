@@ -1,6 +1,6 @@
-package com.reminder.dao;
+package com.reminder.dao.app;
 
-import com.reminder.entity.UserPrompt;
+import com.reminder.entity.app.UserPrompt;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

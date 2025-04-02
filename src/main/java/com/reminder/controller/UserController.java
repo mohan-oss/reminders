@@ -1,7 +1,7 @@
 package com.reminder.controller;
 
 import com.reminder.dto.UserRegistrationDto;
-import com.reminder.service.user.ExpenseUserDetailsService;
+import com.reminder.service.user.AppUserDetailsService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @Slf4j
 public class UserController {
-    private ExpenseUserDetailsService userDetailsService;
+    private AppUserDetailsService userDetailsService;
     @PostMapping("/register")
     public ResponseEntity<Object> registerUser(@Valid @RequestBody UserRegistrationDto userRegistrationDto){
         log.info("registerUser called - {} ", userRegistrationDto);

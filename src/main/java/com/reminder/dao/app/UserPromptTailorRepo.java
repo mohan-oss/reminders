@@ -1,6 +1,6 @@
-package com.reminder.dao;
+package com.reminder.dao.app;
 
-import com.reminder.entity.UserTailor;
+import com.reminder.entity.app.UserTailor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

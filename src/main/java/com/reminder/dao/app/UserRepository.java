@@ -1,6 +1,6 @@
-package com.reminder.dao;
+package com.reminder.dao.app;
 
-import com.reminder.entity.User;
+import com.reminder.entity.app.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,7 @@
 package com.reminder.configuration;
 
 
-import com.reminder.service.user.ExpenseUserDetailsService;
+import com.reminder.service.user.AppUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -20,7 +20,7 @@ public class UserDetailsConfig {
 
     @Bean
     public UserDetailsService userDetailsService(){
-        return new ExpenseUserDetailsService();
+        return new AppUserDetailsService();
     }
 
     @Bean

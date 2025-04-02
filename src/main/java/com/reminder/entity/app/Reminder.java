@@ -1,6 +1,6 @@
-package com.reminder.entity;
+package com.reminder.entity.app;
 
-import com.reminder.entity.convertors.CronExpressionConverter;
+import com.reminder.entity.app.convertors.CronExpressionConverter;
 import jakarta.persistence.*;
 import lombok.*;
 import org.quartz.CronExpression;

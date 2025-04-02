@@ -1,9 +1,9 @@
 package com.reminder.service.user;
 
 import com.reminder.component.UserPrinciple;
-import com.reminder.dao.UserRepository;
+import com.reminder.dao.app.UserRepository;
 import com.reminder.dto.UserRegistrationDto;
-import com.reminder.entity.User;
+import com.reminder.entity.app.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ExpenseUserDetailsService implements UserDetailsService{
+public class AppUserDetailsService implements UserDetailsService{
     @Autowired
     private UserRepository userRepository;
 

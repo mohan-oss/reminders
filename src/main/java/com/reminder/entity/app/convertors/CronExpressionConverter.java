@@ -1,4 +1,4 @@
-package com.reminder.entity.convertors;
+package com.reminder.entity.app.convertors;
 
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;

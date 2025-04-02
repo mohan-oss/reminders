@@ -1,6 +1,6 @@
 package com.reminder.component;
 
-import com.reminder.entity.User;
+import com.reminder.entity.app.User;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

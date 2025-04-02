@@ -1,9 +1,9 @@
 package com.reminder;
 
 import com.reminder.constants.enums.Currency;
-import com.reminder.dao.ExpenseRepo;
+import com.reminder.dao.app.ExpenseRepo;
 import com.reminder.dto.ExpenseDto;
-import com.reminder.entity.ExpenseEntity;
+import com.reminder.entity.app.ExpenseEntity;
 import com.reminder.serviceimpl.ExpenseServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

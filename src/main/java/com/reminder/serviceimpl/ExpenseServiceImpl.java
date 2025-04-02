@@ -1,9 +1,9 @@
 package com.reminder.serviceimpl;
 
 import com.reminder.constants.enums.Currency;
-import com.reminder.dao.ExpenseRepo;
+import com.reminder.dao.app.ExpenseRepo;
 import com.reminder.dto.ExpenseDto;
-import com.reminder.entity.ExpenseEntity;
+import com.reminder.entity.app.ExpenseEntity;
 import com.reminder.service.ExpenseService;
 import org.springframework.stereotype.Service;
 
