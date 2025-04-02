@@ -1,9 +1,9 @@
 package com.reminder.service;
 
-import com.reminder.dao.ReminderRepository;
+import com.reminder.dao.app.ReminderRepository;
 import com.reminder.dto.GetRemaindersRequestDto;
 import com.reminder.dto.SaveRemainderDto;
-import com.reminder.entity.Reminder;
+import com.reminder.entity.app.Reminder;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;

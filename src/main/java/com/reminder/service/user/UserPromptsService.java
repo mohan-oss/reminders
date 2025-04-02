@@ -1,7 +1,7 @@
 package com.reminder.service.user;
 
-import com.reminder.dao.UserPromptsRepo;
-import com.reminder.entity.UserPrompt;
+import com.reminder.dao.app.UserPromptsRepo;
+import com.reminder.entity.app.UserPrompt;
 import com.reminder.utils.AppUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

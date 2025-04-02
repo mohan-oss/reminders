@@ -1,4 +1,4 @@
-package com.reminder.entity;
+package com.reminder.entity.app;
 
 import jakarta.persistence.*;
 import lombok.*;

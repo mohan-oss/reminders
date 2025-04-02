@@ -25,7 +25,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .csrf(AbstractHttpConfigurer::disable)
-                .formLogin(form -> form.defaultSuccessUrl("/get-reminders",true))
+                .formLogin(form -> form.defaultSuccessUrl("/chat.html",true))
                 .httpBasic(Customizer.withDefaults())
                 .build();
     }

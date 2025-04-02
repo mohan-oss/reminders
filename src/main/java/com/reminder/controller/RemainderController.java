@@ -2,7 +2,7 @@ package com.reminder.controller;
 
 import com.reminder.dto.GetRemaindersRequestDto;
 import com.reminder.dto.SaveRemainderDto;
-import com.reminder.entity.Reminder;
+import com.reminder.entity.app.Reminder;
 import com.reminder.service.RemainderService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.reminder.entity;
+package com.reminder.entity.app;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -35,9 +35,9 @@ public class User{
     @Column
     private List<String> roles;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "is_active")
     private Boolean isActive = true;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "account_locked")
     private Boolean accountLocked = false;
 }

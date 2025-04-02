@@ -1,22 +1,21 @@
-package com.reminder.entity;
+package com.reminder.entity.app;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "user_tailors")
+@Table(name = "common_tailors")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserTailor {
+public class CommonPromptTailors{
     @Id
     @GeneratedValue
     private Long id;
+
     @Column
     private String tailor;
 
-    @Column(name = "user_id", nullable = false)
-    private String userId;
 }

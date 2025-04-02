@@ -1,4 +1,4 @@
-package com.reminder.entity;
+package com.reminder.entity.app;
 
 import com.reminder.constants.enums.Currency;
 import com.reminder.constants.enums.ExpenseCategories;

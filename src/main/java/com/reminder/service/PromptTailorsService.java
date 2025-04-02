@@ -1,9 +1,9 @@
 package com.reminder.service;
 
-import com.reminder.dao.CommonPromptTailorsRepo;
-import com.reminder.dao.UserPromptTailorRepo;
-import com.reminder.entity.CommonPromptTailors;
-import com.reminder.entity.UserTailor;
+import com.reminder.dao.app.CommonPromptTailorsRepo;
+import com.reminder.dao.app.UserPromptTailorRepo;
+import com.reminder.entity.app.CommonPromptTailors;
+import com.reminder.entity.app.UserTailor;
 import com.reminder.utils.AppUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
