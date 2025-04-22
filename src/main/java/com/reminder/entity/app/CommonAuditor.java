@@ -20,17 +20,19 @@ import java.time.LocalDateTime;
 public abstract class CommonAuditor {
 
     @CreatedDate
-    @Column(nullable = false)
+    @Column(nullable = false,name = "created_at")
     private LocalDateTime createdAt;
 
     @LastModifiedDate
+    @Column(name = "modified_at")
     private LocalDateTime modifiedAt;
 
     @CreatedBy
-    @Column(nullable = false)
+    @Column(nullable = false, name="created_by")
     private String createdBy;
 
     @LastModifiedBy
+    @Column(name = "modified_by")
     private String modifiedBy;
 
 }

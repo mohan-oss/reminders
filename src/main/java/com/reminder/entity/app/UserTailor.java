@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserTailor {
+public class UserTailor extends CommonAuditor{
     @Id
     @GeneratedValue
     private Long id;
